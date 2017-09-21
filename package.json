@@ -1,0 +1,19 @@
+{
+  "name": "hy-components",
+  "version": "0.0.1",
+  "description": "some vue components by myself",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HyperionD/hy-components.git"
+  },
+  "author": "HyperionD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HyperionD/hy-components/issues"
+  },
+  "homepage": "https://github.com/HyperionD/hy-components#readme"
+}
