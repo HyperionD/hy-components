@@ -17,7 +17,9 @@
         mounted: function () {
             this.$bus.$on("show_flash", (message, type) => {
                 this.visible = true;
-                this.message.push(message);
+                if (message !== "") {
+                    this.message.push(message);
+                }
                 this.msgStyle = type || "normal";
                 setTimeout(() => {
                     this.message = [];
