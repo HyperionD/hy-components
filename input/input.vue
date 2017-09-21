@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        name: "hyInput",
+        name: "hy-input",
         data: function () {
             return {
                 inputType: false
