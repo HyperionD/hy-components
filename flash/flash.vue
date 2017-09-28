@@ -15,7 +15,7 @@
             }
         },
         mounted: function () {
-            this.$bus.$on("show_flash", (message, type) => {
+            this.$bus.$on("flash_message", (message, type) => {
                 this.visible = true;
                 if (message !== "") {
                     this.message.push(message);

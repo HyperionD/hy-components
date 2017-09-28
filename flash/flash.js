@@ -2,9 +2,13 @@ import hyFlash from "./flash.vue";
 
 hyFlash.install = function (Vue) {
     Vue.component(hyFlash.name, hyFlash);
-    Vue.prototype.$flash = function (message, type) {
-        this.$bus.$emit("show_flash", message, type);
-    }
+    Vue.mixin({
+        methods: {
+            $flash: function (message, type) {
+                this.$bus.$emit("flash_message", message, type);
+            }
+        }
+    })
 };
 
 export default hyFlash;

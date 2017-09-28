@@ -1,9 +1,26 @@
 <template>
-    <div id="hy-input" :class="inputClass">
+    <div v-if="isDatalistInput" class="line">
+        <input
+                list="datalist-input"
+                :placeholder="placeholder"
+                v-bind:value="value"
+                v-on:input="update($event.target.value)"
+                @keyup.enter="onEnter"
+                @click="onClick"
+        />
+        <datalist id="datalist-input" >
+            <option v-for="item in datalist">{{ item }}</option>
+        </datalist>
+    </div>
+    <div v-else :class="inputClass">
         <div></div><input
                         :type="type"
                         :placeholder="placeholder"
-                        v-on:input="update($event.target.value)"/>
+                        v-bind:value="value"
+                        v-on:input="update($event.target.value)"
+                        @keyup.enter="onEnter"
+                        @click="onClick"
+                    />
     </div>
 </template>
 
@@ -12,10 +29,18 @@
         name: "hy-input",
         data: function () {
             return {
-                inputType: false
+                isDatalistInput: false
             }
         },
         props: {
+            value: {
+                type: [String, Number],
+                default: ""
+            },
+            inputType: {
+                type: String,
+                default: ""
+            },
             inputClass: {
                 type: String,
                 default: ""
@@ -27,16 +52,28 @@
             type: {
                 type: String,
                 default: "text"
+            },
+            datalist: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
             }
         },
         mounted: function () {
-            if (this.type === "password") {
-                this.inputType = "password";
+            if (this.inputType === "datalist") {
+                this.isDatalistInput = true;
             }
         },
         methods: {
             update: function (value) {
-                this.$emit("input", value)
+                this.$emit("input", value);
+            },
+            onEnter: function () {
+                this.$emit("enter");
+            },
+            onClick: function () {
+                this.$emit("click");
             }
         }
     }
@@ -91,6 +128,15 @@
         input {
             outline: none;
             border: 1px solid @basecolor;
+            border-radius: 10px;
+            padding-left: 10px;
+        }
+    }
+
+    .none {
+        input {
+            outline: none;
+            border: none;
             border-radius: 10px;
             padding-left: 10px;
         }
