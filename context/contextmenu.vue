@@ -1,5 +1,5 @@
 <template>
-    <div v-show="show" id="context" :style="style" @mousedown.stop>
+    <div v-show="show" id="context" :style="style" @contextmenu.prevent @mousedown.stop>
         <slot></slot>
     </div>
 </template>
@@ -28,7 +28,8 @@
             init: function () {
                 if (this.el !== null) {
                     this.el.addEventListener("contextmenu", this.showMenu);
-                    document.addEventListener("mousedown", this.hideMenu)
+                    document.addEventListener("mousedown", this.hideMenu);
+                    document.addEventListener("mouseup", this.hideMenu);
                 }
             },
             showMenu: function (e) {
@@ -39,9 +40,6 @@
             },
             hideMenu: function () {
                 this.show = false;
-            },
-            test: function () {
-                console.log("click menu");
             }
         }
     }
